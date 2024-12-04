@@ -1,0 +1,32 @@
+# Usa un'immagine base di Debian
+FROM debian:latest
+
+# Imposta il maintainer (opzionale)
+LABEL maintainer="your_email@example.com"
+
+# Aggiorna i pacchetti di sistema e installa le dipendenze
+RUN apt update && apt install -y git wget tar make nano && apt clean
+
+# Scarica e installa Go
+ENV GO_VERSION=1.20.6
+RUN wget https://golang.org/dl/go${GO_VERSION}.linux-amd64.tar.gz && \
+    tar -xvf go${GO_VERSION}.linux-amd64.tar.gz && \
+    mv go /usr/local && \
+    rm go${GO_VERSION}.linux-amd64.tar.gz
+
+# Configura il PATH per Go
+ENV PATH="/usr/local/go/bin:${PATH}"
+
+# Verifica l'installazione di Go
+#RUN go version
+
+# Clona il repository di Evilginx2
+RUN git clone https://github.com/kgretzky/evilginx2.git
+
+# Compila Evilginx2
+WORKDIR /evilginx2
+RUN make && go build
+
+# Espone le porte necessarie per Evilginx2
+EXPOSE 8080 443
+
