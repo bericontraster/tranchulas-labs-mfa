@@ -6,45 +6,23 @@
 	
 Verify if they run:
 
-	docker ps -a
-	CONTAINER ID   IMAGE                     COMMAND                  CREATED         STATUS         PORTS                                                                              NAMES
-	d7bc39548885   evilginx_lab_evilginx2    "/bin/bash -l"           8 seconds ago   Up 6 seconds   0.0.0.0:443->443/tcp, :::443->443/tcp, 0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   evilginx3.local
-	6d5eac2940a7   evilginx_lab_apache-php   "apachectl -D FOREGR…"   8 seconds ago   Up 6 seconds   80/tcp, 443/tcp                                                                    targetsite.local
+	docker ps
+	CONTAINER ID   IMAGE                          COMMAND                  CREATED          STATUS          PORTS               NAMES
+	636fa17740bf   evilginx_lab-main_apache-php   "apachectl -D FOREGR…"   41 minutes ago   Up 41 minutes   80/tcp, 443/tcp     targetsite.local
+	2c595290c650   evilginx_lab-main_evilginx2    "/bin/bash -l"           41 minutes ago   Up 41 minutes   443/tcp, 8080/tcp   targetsile.local
 
 
+## modify hosts in file in the host machine to mimic DNS
+Add the following lines:
 
-## stop and remove all the containers
-
-	sudo docker stop $(docker ps -q) && sudo docker rm $(docker ps -a -q) && sudo docker image prune -a
-	
-## access a container
-
-	sudo docker exec -it <container name> /bin/bash
-
-## check mounted volumes
-
-	sudo docker inspect <container name> | grep Mounts -A 10
-	
-
-## see logs
-
-	sudo docker logs <container name>
-	
-## show containers IP
-
-	sudo docker ps -q | xargs -n 1 docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'
-	
-	/targetsite.local - 172.18.0.20
-	/evilginx3.local - 172.18.0.10
-
-
-
+	172.18.0.20 	targetsite.local login.targetsite.local
+	172.18.0.10	targetsile.local login.targetsile.local
 
 
 
 ## Start evilnginx
 ```bash 
-sudo docker exec -it evilginx3.local /bin/bash 
+sudo docker exec -it /targetsile.local /bin/bash 
 root@bd1cc49349a5:/evilginx2# ./evilginx2 -developer
 
                                          
@@ -136,4 +114,29 @@ by Kuba Gretzky (@mrgretzky)     version 3.3.0
 [{"path":"/","domain":"login.targetsite.local","expirationDate":1764865104,"value":"sibi2d083ecfn4shbco7i1ro5d--very-insecure-fixed-VALUE--DO-NOT-USE-IT-NEVER-IN-REAL-APPLICATION","name":"session_token","httpOnly":true,"hostOnly":true}]
 
 ```
+## useful Docker commands
+
+### stop and remove all the containers
+
+	sudo docker stop $(docker ps -q) && sudo docker rm $(docker ps -a -q) && sudo docker image prune -a
+	
+### access a container
+
+	sudo docker exec -it <container name> /bin/bash
+
+### check mounted volumes
+
+	sudo docker inspect <container name> | grep Mounts -A 10
+	
+
+## see logs
+
+	sudo docker logs <container name>
+	
+### show containers IP
+
+	sudo docker ps -q | xargs -n 1 docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'
+	
+	/targetsite.local - 172.18.0.20
+	/targetsile.local - 172.18.0.10
 
