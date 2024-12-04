@@ -23,7 +23,7 @@ RUN mkdir -p /etc/ssl/certs /etc/ssl/private && \
     openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -keyout /etc/ssl/private/server.key \
     -out /etc/ssl/certs/server.crt \
-    -subj "/C=IT/ST=Italy/L=Rome/O=Test Inc/OU=IT/CN=www.testinc.local"
+    -subj "/C=IT/ST=Italy/L=Rome/O=Test Inc/OU=IT/CN=targetsite.local"
 
 
 # Copia un file di configurazione personalizzato per Apache (virtual host)
