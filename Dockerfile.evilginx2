@@ -1,9 +1,6 @@
 # Usa un'immagine base di Debian
 FROM debian:latest
 
-# Imposta il maintainer (opzionale)
-LABEL maintainer="your_email@example.com"
-
 # Aggiorna i pacchetti di sistema e installa le dipendenze
 RUN apt update && apt install -y git wget tar make nano && apt clean
 
