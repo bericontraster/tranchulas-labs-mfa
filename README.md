@@ -5,20 +5,16 @@
 
 ## remove the containers
 
-	sudo docker-compose down && sudo docker image prune -a
+	sudo docker stop $(docker ps -q) && sudo docker image prune -a
 	
 ## access the container
 
-	docker exec -it my-apache-container /bin/bash
+	sudo docker exec -it <container name> /bin/bash
 
 ## check mounted volumes
 
 	docker inspect my-apache-container | grep Mounts -A 10
 	
-## modify your host file
-
-	docker_container_IP www.testinc.local
-
 
 ## see logs
 
