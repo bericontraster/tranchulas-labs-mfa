@@ -8,8 +8,9 @@ Verify if they run:
 
 	docker ps -a
 	CONTAINER ID   IMAGE                     COMMAND                  CREATED         STATUS         PORTS                                                                              NAMES
-	d82bae9ce059   evilginx_lab_evilginx2    "/bin/bash -l"           2 minutes ago   Up 2 minutes   0.0.0.0:443->443/tcp, :::443->443/tcp, 0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   evilginx2-container
-	8420ea1c5c36   evilginx_lab_apache-php   "apachectl -D FOREGR…"   2 minutes ago   Up 2 minutes   80/tcp, 443/tcp                                                                    my-apache-container
+	d7bc39548885   evilginx_lab_evilginx2    "/bin/bash -l"           8 seconds ago   Up 6 seconds   0.0.0.0:443->443/tcp, :::443->443/tcp, 0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   evilginx3.local
+	6d5eac2940a7   evilginx_lab_apache-php   "apachectl -D FOREGR…"   8 seconds ago   Up 6 seconds   80/tcp, 443/tcp                                                                    targetsite.local
+
 
 
 ## stop and remove all the containers
@@ -33,15 +34,17 @@ Verify if they run:
 
 	sudo docker ps -q | xargs -n 1 docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'
 	
-	/my-apache-container - 172.23.0.2
-	/evilginx2-container - 172.23.0.3
+	/targetsite.local - 172.18.0.20
+	/evilginx3.local - 172.18.0.10
+
+
 
 
 
 
 ## Start evilnginx
 	
-	sudo docker exec -it evilginx2-container /bin/bash 
+	sudo docker exec -it evilginx3.local /bin/bash 
 	root@d82bae9ce059:/evilginx2# ./evilginx2 
 
                                          
@@ -79,4 +82,10 @@ Verify if they run:
 
 	:  
 
+## Config Evilngnix container
+
+### Add a subdomain alias
+
+sudo docker exec -it evilginx3.local /bin/bash                                                     
+root@f5c76fc94de6:/evilginx2# echo "127.0.0.1    example.local" >> /etc/hosts
 	

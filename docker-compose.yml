@@ -3,17 +3,19 @@ services:
   apache-php:
     build:
       context: .  # Current directory, where your Dockerfile is located
-    container_name: my-apache-container
+    container_name: targetsite.local
     volumes:
       - ./app:/var/www/html
     networks:
-      - my-network
+      my_custom_network:
+        ipv4_address: 172.18.0.20
+      
 
   evilginx2:
     build:
       context: .  # Path to your project directory containing Dockerfile.evilginx2
       dockerfile: Dockerfile.evilginx2  # Specify the Evilginx2 Dockerfile
-    container_name: evilginx2-container
+    container_name: evilginx3.local
     command: /bin/bash -l   # Avvia una shell bash in modalità login
     stdin_open: true        # Mantieni l'input aperto
     tty: true               # Mantieni il terminale attivo
@@ -23,10 +25,15 @@ services:
       - "8080:8080"
       - "443:443"
     networks:
-      - my-network
-    environment:
-      - VIRTUAL_HOST=evilginx2.local  # Modify based on Evilginx2 config if necessary
+      my_custom_network:
+        ipv4_address: 172.18.0.10
+    extra_hosts:
+      - "login.targetsite.local:172.18.0.20"  # Specifica l'IP statico o il nome
+      - "targetsite.local:172.18.0.20"
 
 networks:
-  my-network:
+  my_custom_network:
     driver: bridge
+    ipam:
+      config:
+        - subnet: "172.18.0.0/16"
