@@ -27,6 +27,15 @@ Verify if they run:
 ## see logs
 
 	sudo docker logs <container name>
+	
+## show containers IP
+
+	sudo docker ps -q | xargs -n 1 docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'
+	
+	/my-apache-container - 172.23.0.2
+	/evilginx2-container - 172.23.0.3
+
+
 
 
 ## Start evilnginx

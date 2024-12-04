@@ -2,7 +2,7 @@
 FROM debian:latest
 
 # Aggiorna i pacchetti di sistema e installa le dipendenze
-RUN apt update && apt install -y git wget tar make nano && apt clean
+RUN apt update && apt install -y git wget tar make nano net-tools iputils-ping && apt clean
 
 # Scarica e installa Go
 ENV GO_VERSION=1.20.6

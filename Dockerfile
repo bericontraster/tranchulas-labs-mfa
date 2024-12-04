@@ -10,6 +10,8 @@ RUN apt-get update && apt-get install -y \
     php \
     libapache2-mod-php \
     openssl \
+    net-tools \
+    iputils-ping \
     && apt-get clean
 
 # Abilita il modulo SSL e il virtual host HTTPS di Apache

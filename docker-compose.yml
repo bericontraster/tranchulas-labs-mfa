@@ -17,6 +17,8 @@ services:
     command: /bin/bash -l   # Avvia una shell bash in modalità login
     stdin_open: true        # Mantieni l'input aperto
     tty: true               # Mantieni il terminale attivo
+    volumes:
+      - ./phishlets:/evilginx2/phishlets 
     ports:
       - "8080:8080"
       - "443:443"
