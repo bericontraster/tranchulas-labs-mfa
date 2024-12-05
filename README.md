@@ -1,5 +1,24 @@
 # Evilginx LAB on Docker
 ![back](evil-dock.jpg)
+
+## Disclaimer
+As you can imagine, this lab was created solely and exclusively for the purposes outlined below, and absolutely not for any malicious activity. Of course, I disclaim any responsibility for the improper use of the material contained in this repository.
+The containers must absolutely not be exposed to a public network.
+
+Please note that the comments inside files are in italian.
+
+## Why?
+I created a local lab to test Evilginx without the need to purchase a domain or presumably a VPS. It is useful for the following use cases:
+1. Study and practice
+2. Phishlet development and testing
+3. Demonstrations and training activities
+
+## Lab architecture
+The lab consists of two Linux Docker containers. One hosts a simple PHP application that implements an MFA login process. The application is completely insecure, so it is strongly recommended not to expose it to the Internet and not to use the code in real-world applications. The second container hosts the Evilginx3 server.
+
+## Objective
+Our goal is to intercept the authentication tokens (cookies) needed to hijack the user's session. It's very straightforward.
+
 ## build & run the containers
 	
 	sudo docker-compose up --build -d --force-recreate --remove-orphans
