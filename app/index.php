@@ -25,13 +25,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header('Location: admin.php');
         exit();
     } else {
-        $error = 'Credenziali errate!';
+        $error = 'Wrong credentials!';
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php endif; ?>
     
     <form action="index.php" method="POST">
-        <label for="username">Nome utente:</label>
+        <label for="username">Username:</label>
         <input type="text" id="username" name="username" required><br><br>
         
         <label for="password">Password:</label>
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          <label for="otp">OTP:</label>
         <input type="password" id="otp" name="otp" maxlength="6" required><br><br>
         
-        <input type="submit" value="Accedi">
+        <input type="submit" value="Login">
     </form>
 </body>
 </html>
