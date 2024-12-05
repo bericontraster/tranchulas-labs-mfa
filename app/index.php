@@ -3,20 +3,23 @@
 
 session_start();
 
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Carica le credenziali dal file
     $config = require 'login-config.php';
 
     // Verifica se le credenziali sono corrette
-    if ($_POST['username'] == $config['username'] && $_POST['password'] == $config['password']) {
+    if ($_POST['username'] == $config['username'] && $_POST['password'] == $config['password'] && $_POST['otp'] == $config['otp']) {
+    
+    	 session_regenerate_id(true);
+  
         // Genera un token di sessione unico
-        $session_token = session_id() . "--very-insecure-fixed-VALUE--DO-NOT-USE-IT-NEVER-IN-REAL-APPLICATION";
+        $session_token = session_id()."--fixed-value-very-insecure-NEVER-USE-IT-IN-PRODUCTION";
+        
 
         // Imposta il cookie con il session token (con scadenza di 1 ora)
         setcookie('session_token', $session_token, time() + 3600, '/', '', true, true); // Sicuro e accessibile solo tramite HTTP (flags Secure e HttpOnly)
 
-        // Imposta anche un tempo di scadenza per la sessione nel server (opzionale)
-        $_SESSION['session_token_expiry'] = time() + 3600;  // Scadenza di 1 ora
 
         // Redirige l'utente alla pagina di amministrazione
         header('Location: admin.php');
@@ -36,6 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <p class="red-bold">THIS APPLICATION IS VERY INSECURE and has been created only for testing purpose</p>
+
     <h2>Login</h2>
     
     <?php if (isset($error)) : ?>
@@ -48,6 +53,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required><br><br>
+        
+         <label for="otp">OTP:</label>
+        <input type="password" id="otp" name="otp" maxlength="6" required><br><br>
         
         <input type="submit" value="Accedi">
     </form>

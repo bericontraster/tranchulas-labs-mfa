@@ -3,22 +3,42 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    
     background-color: #f4f4f4;
 }
 
+.red-bold {
+    color: red; /* Imposta il colore del testo a rosso */
+    font-weight: bold; /* Rende il testo in grassetto */
+    font-size: 24px; /* Testo più grande */
+    margin: 10px;
+}
+
+
 h2 {
-    margin-right: 20px;
+    margin: 20px;
+}
+
+p, a {
+    font-weight: bold; /* Rende il testo in grassetto */
+    font-size: 20px; /* Testo più grande */
+    margin: 10px;
+}
+
+pre {
+
+  margin: 10px;
+  
+
 }
 
 form {
+    margin: 30px;
     background-color: white;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 200px;
 }
 
 input[type="text"], input[type="password"] {

