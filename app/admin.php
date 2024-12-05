@@ -35,8 +35,8 @@ if ($session_token !== $expected_token) {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>Benvenuto nell'area amministrativa</h2>
-    <p>Sei autenticato con successo!</p>
+    <h2>Welcome to the administrative area</h2>
+    <p>You have successfully authenticated</p>
     <pre title="Free Palestine">
 🟥⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
 🟥🟥⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
