@@ -15,15 +15,17 @@ I created a local lab to test Evilginx without the need to purchase a domain or 
 
 ## Lab architecture
 The lab consists of two Linux Docker containers. One hosts a simple PHP application that implements an MFA login process. The application is completely insecure, so it is strongly recommended not to expose it to the Internet and not to use the code in real-world applications. The second container hosts the Evilginx3 server.
+You can find the static parameters to access the web application in <b>/app/login-config.php</b>
 
 ## Objective
 Our goal is to intercept the authentication tokens (cookies) needed to hijack the user's session. It's very straightforward.
 
-## build & run the containers
+## Build & run the containers
+Clone this repo and enter the directory, then execute:
 	
 	sudo docker-compose up --build -d --force-recreate --remove-orphans
 	
-Verify if they run:
+Verify the containers:
 
 	docker ps
 	CONTAINER ID   IMAGE                          COMMAND                  CREATED          STATUS          PORTS               NAMES
@@ -31,54 +33,22 @@ Verify if they run:
 	2c595290c650   evilginx_lab-main_evilginx2    "/bin/bash -l"           41 minutes ago   Up 41 minutes   443/tcp, 8080/tcp   targetsile.local
 
 
-## modify hosts in file in the host machine to mimic DNS
-Add the following lines:
+## Mimic DNS
+Modify hosts file in your host machine. Add the following lines:
 
 	172.18.0.20 	targetsite.local login.targetsite.local
 	172.18.0.10	targetsile.local login.targetsile.local
-
+Visit the Legitimate site at: https://login.targetsite.local, with a bit of typo-squatting, the evil site will be https://login.targetsile.local
 
 
 ## Start evilnginx
-```bash 
-sudo docker exec -it /targetsile.local /bin/bash 
-root@bd1cc49349a5:/evilginx2# ./evilginx2 -developer
+Enter Evilginix container shell
 
-                                         
-___________      __ __           __               
-\_   _____/__  _|__|  |    ____ |__| ____ ___  ___
-|    __)_\  \/ /  |  |   / __ \|  |/    \\  \/  /
-|        \\   /|  |  |__/ /_/  >  |   |  \>    < 
-/_______  / \_/ |__|____/\___  /|__|___|  /__/\_ \
-     \/              /_____/         \/      \/
-
-        - --  Community Edition  -- -
-
-by Kuba Gretzky (@mrgretzky)     version 3.3.0
-                                         
-
-[16:02:29] [inf] Evilginx Mastery Course: https://academy.breakdev.org/evilginx-mastery (learn how to create phishlets)
-[16:02:29] [inf] loading phishlets from: /evilginx2/phishlets
-[16:02:29] [inf] loading configuration from: /root/.evilginx
-[16:02:29] [inf] blacklist mode set to: unauth
-[16:02:29] [inf] unauthorized request redirection URL set to: https://www.youtube.com/watch?v=dQw4w9WgXcQ
-[16:02:29] [inf] https port set to: 443
-[16:02:29] [inf] dns port set to: 53
-[16:02:29] [inf] autocert is now enabled
-[16:02:29] [inf] blacklist: loaded 0 ip addresses and 0 ip masks
-[16:02:30] [war] server domain not set! type: config domain <domain>
-[16:02:30] [war] server external ip not set! type: config ipv4 external <external_ipv4_address>
-
-+-------------------+-----------+-------------+-----------+-------------+
-|     phishlet      |  status   | visibility  | hostname  | unauth_url  |                                                                                                                                                                  
-+-------------------+-----------+-------------+-----------+-------------+                                                                                                                                                                  
-| example           | disabled  | visible     |           |             |                                                                                                                                                                  
-| targetsite-local  | disabled  | visible     |           |             |                                                                                                                                                                  
-+-------------------+-----------+-------------+-----------+-------------+                                                                                                                                                                  
-
-:  
-
-
+	sudo docker exec -it /targetsile.local /bin/bash
+Then start Evilginix in developer mode, in this mode, instead of trying to obtain LetsEncrypt SSL/TLS certificates, it will automatically generate self-signed certificates.
+```bash  
+root@bd1cc49349a5:/evilginx2# ./evilginx2 -developer -debug
+TOADD
 ```
                                         
 ## Config Evilngnix container
@@ -101,6 +71,8 @@ by Kuba Gretzky (@mrgretzky)     version 3.3.0
  
 	: lures get-url 0
 		https://login.targetsile.local/AhsTYOfa
+## Visit the malicious URL
+
 
 ## Capturing the session token
 ```bash 
@@ -140,26 +112,26 @@ by Kuba Gretzky (@mrgretzky)     version 3.3.0
 
 
 ```
-## useful Docker commands
+## Useful Docker commands
 
-### stop and remove all the containers
+### Stop and remove all the containers
 
 	sudo docker stop $(docker ps -q) && sudo docker rm $(docker ps -a -q) && sudo docker image prune -a
 	
-### access a container
+### Access a shell's container
 
 	sudo docker exec -it <container name> /bin/bash
 
-### check mounted volumes
+### Check mounted volumes
 
 	sudo docker inspect <container name> | grep Mounts -A 10
 	
 
-## see logs
+## Inspect logs
 
 	sudo docker logs <container name>
 	
-### show containers IP
+### Show containers IP
 
 	sudo docker ps -q | xargs -n 1 docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'
 	
