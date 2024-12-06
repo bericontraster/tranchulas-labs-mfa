@@ -126,8 +126,8 @@ Note that I used the debug option too, since, I don't know why at the moment, th
 ## Demo video
 - I use Firefox to surf the lure's site
 - I use Chromium to visit the legitimate site
-  
-  [Watch the video](demo.mp4)
+
+
 
 Enjoy :)
 
