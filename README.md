@@ -55,7 +55,7 @@ Modify hosts file in your host machine. Add the following lines:
 	172.18.0.20 	targetsite.local login.targetsite.local
 	172.18.0.10	targetsile.local login.targetsile.local
 	
-Visit the Legitimate site at: https://login.targetsite.local, with a bit of typo-squatting, the evil site will be https://login.targetsile.local
+Visit the Legitimate site at: https://login.targetsite.local, with a bit of typo-squatting, the evil site responds at: https://login.targetsile.local
 
 
 ## Start evilnginx
