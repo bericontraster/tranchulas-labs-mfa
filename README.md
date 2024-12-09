@@ -2,7 +2,7 @@
 ![back](evil-dock.jpg)
 
 ## Disclaimer
-As you can imagine, this lab was created solely and exclusively for the purposes outlined below, and absolutely not for any malicious activity. Of course, I disclaim any responsibility for the improper use of the material contained in this repository.
+As you can imagine, this lab was created solely and exclusively for the purposes outlined in the<b>Why</b> section, and absolutely not for any malicious activity. Of course, I disclaim any responsibility for the improper use of the material contained in this repository.
 The containers must absolutely not be exposed to a public network.
 
 Please note that the comments inside files are in italian.
@@ -133,7 +133,7 @@ Enjoy :)
 
 ### Stop and remove all the containers
 
-	sudo docker stop $(docker ps -q) && sudo docker rm $(docker ps -a -q) && sudo docker image prune -a
+	 sudo docker stop $(docker ps -q) & sudo docker rm $(docker ps -a -q) & sudo docker image prune -a & sudo docker-compose down
 	
 ### Access a shell's container
 
