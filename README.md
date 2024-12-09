@@ -134,7 +134,10 @@ Enjoy :)
 
 ### Stop and remove all the containers
 
-	 sudo docker stop $(docker ps -q) & sudo docker rm $(docker ps -a -q) & sudo docker image prune -a & sudo docker-compose down
+	sudo docker stop $(docker ps -q)
+  	sudo docker rm $(docker ps -a -q)
+   	sudo docker image prune -a
+    	sudo docker-compose down
 	
 ### Access a shell's container
 
