@@ -127,11 +127,6 @@ Note that I used the debug option too, since, I don't know why at the moment, th
 - I use Firefox to surf the lure's site
 - I use Chromium to visit the legitimate site
 
-<video width="320" height="240" controls>
-  <source src="demo.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-
 
 Enjoy :)
 
