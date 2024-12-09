@@ -110,7 +110,7 @@ Note that I used the debug option too, since, I don't know why at the moment, th
 	
 : phishlets enable  targetsite-local 
 : lures create targetsite-local 
-
+: lures
 
 +-----+-------------------+-----------+------------+-------------+---------------+---------+-------+
 | id  |     phishlet      | hostname  |   path     | redirector  | redirect_url  | paused  |  og   |                                                                                                                                        
