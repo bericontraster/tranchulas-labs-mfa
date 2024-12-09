@@ -18,8 +18,8 @@ The lab consists of two Linux Docker containers. One hosts a simple PHP applicat
 You can find the static parameters to access the web application in <b>/app/login-config.php</b>.
 
 *As mentioned before the app is really inscure since:
-- the credentials are hardoced
-- even worse, the OTP code is even a costant
+- the credentials are hardcoded
+- the OTP code is a simple costant
 - session token generation process is higly predictable even without having access to the source code
 
 So once again don't use it outside the lab enviroment. 
