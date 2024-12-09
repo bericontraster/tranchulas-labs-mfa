@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     	 session_regenerate_id(true);
   
         // Genera un token di sessione unico
-        $session_token = session_id()."--fixed-value-very-insecure-NEVER-USE-IT-IN-PRODUCTION";
+        $session_token = hash("sha256",($config['username'].$config['otp']));
         
 
         // Imposta il cookie con il session token (con scadenza di 1 ora)
@@ -40,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
     <p class="red-bold">THIS APPLICATION IS VERY INSECURE and has been created only for testing purpose</p>
+    <p>
 
     <h2>Login</h2>
     
@@ -59,5 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         <input type="submit" value="Login">
     </form>
+    <div>&nbsp;&nbsp;Poorely coded by Zinzloun ¯\_(ツ)_/¯</div>
 </body>
 </html>

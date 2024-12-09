@@ -15,7 +15,7 @@ RUN wget https://golang.org/dl/go${GO_VERSION}.linux-amd64.tar.gz && \
 ENV PATH="/usr/local/go/bin:${PATH}"
 
 # Clona il repository di Evilginx2
-RUN git clone https://github.com/kgretzky/evilginx2.git
+RUN git clone https://github.com/kgretzky/evilginx2
 
 # Compila Evilginx2
 WORKDIR /evilginx2

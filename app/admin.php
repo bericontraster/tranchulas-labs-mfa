@@ -10,16 +10,15 @@ if (!isset($_COOKIE['session_token'])) {
     exit();
 }
 
+$config = require 'login-config.php';
 
 // VERIFICA TOKEN
 $session_token = $_COOKIE['session_token'];
-$expected_token = session_id()."--fixed-value-very-insecure-NEVER-USE-IT-IN-PRODUCTION";
+$expected_token = hash("sha256",($config['username'].$config['otp']));
 
 if ($session_token !== $expected_token) {
-    // Se il token non corrisponde al valore atteso, termina la sessione e reindirizza
-    session_destroy();
-    setcookie('session_token', '', time() - 3600, '/', '', true, true); // Elimina il cookie
-    header('Location: index.php'); // Reindirizza alla pagina di login
+   
+    header('Location: logout.php'); // Reindirizza alla pagina di login
     exit();
 }
 
@@ -48,6 +47,7 @@ if ($session_token !== $expected_token) {
 🟥🟥🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩
 🟥🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩
 </pre>    
-    <a href="logout.php">Esci</a>
+    <a href="logout.php">Logout</a>
+        <div>&nbsp;&nbsp;Poorely coded by Zinzloun ¯\_(ツ)_/¯</div>
 </body>
 </html>
