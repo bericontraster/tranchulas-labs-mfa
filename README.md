@@ -17,7 +17,7 @@ I created a local lab to test Evilginx without the need to purchase a domain or 
 The lab consists of two Linux Docker containers. One hosts a simple PHP application that implements a fake MFA login process*. The application is completely insecure, so is strongly recommended to not expose it to the Internet and to not use the code in real-world applications. The second container hosts the Evilginx3 server.
 You can find the static parameters to access the web application in <b>/app/login-config.php</b>.
 
-*As mentioned before the app is really inscure since:
+*As mentioned before the app is very inscure since:
 - the credentials are hardcoded
 - the OTP code is a simple costant
 - session token generation process is higly predictable even without having access to the source code
