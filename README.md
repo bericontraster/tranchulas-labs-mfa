@@ -146,7 +146,10 @@ Enjoy :)
 	sudo docker rm $(docker ps -a -q)
 	sudo docker image prune -a
 	sudo docker-compose down
-	
+### Prune docket networs, useful in case you get: ERROR: Pool overlaps with other one on this address space
+
+	sudo docker network prune
+
 ### Access a shell's container
 
 	sudo docker exec -it <container name> /bin/bash
