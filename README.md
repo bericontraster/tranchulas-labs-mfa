@@ -130,11 +130,8 @@ Note that I used the debug option too, since, I don't know why at the moment, th
 	https://login.targetsile.local/nBfYHrTO
 ```
 	
-## Demo video (hosted on Screenrec)
-- I use Firefox to surf the lure's site
-- I use Chromium to visit the legitimate site
-
-https://screenrec.com/share/SubzqN2YLx
+## Demo Video (GIF)
+![Demo GIF](./demo.gif)
 
 Enjoy :)
 
