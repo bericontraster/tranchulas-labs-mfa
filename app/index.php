@@ -60,6 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
         <input type="submit" value="Login">
     </form>
-    <div>&nbsp;&nbsp;Poorely coded by Zinzloun ¯\_(ツ)_/¯</div>
+    <div>&nbsp;&nbsp;Tranchulas Labs</div>
 </body>
 </html>
