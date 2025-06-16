@@ -48,6 +48,6 @@ if ($session_token !== $expected_token) {
 🟥🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩
 </pre>    
     <a href="logout.php">Logout</a>
-        <div>&nbsp;&nbsp;Poorely coded by Zinzloun ¯\_(ツ)_/¯</div>
+        <div>&nbsp;&nbsp;Tranchulas Labs</div>
 </body>
 </html>
