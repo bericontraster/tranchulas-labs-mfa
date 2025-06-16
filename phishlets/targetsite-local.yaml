@@ -1,5 +1,5 @@
 min_ver: '3.0.0'
-author: 'zinzloun'
+author: 'tranchulas-labs'
 
 proxy_hosts:
   - {phish_sub: 'login', orig_sub: 'login', domain: 'targetsite.local', session: true, is_landing: true}
