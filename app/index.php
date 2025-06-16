@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <p class="red-bold">THIS APPLICATION IS VERY INSECURE and has been created only for testing purpose</p>
+    <p class="red-bold">Tranchulas Labs</p>
     <p>
 
     <h2>Login</h2>
