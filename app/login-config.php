@@ -3,6 +3,6 @@
 
 return [
     'username' => 'admin', 
-    'password' => 'Pwd Sicur@ 123',
-    'otp' => '123456'
+    'password' => 'Admin@123',
+    'otp' => '447688'
 ];
